@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Reflection;
 using Xunit;
 
 namespace dimp.tests
@@ -34,6 +35,38 @@ namespace dimp.tests
 
             Assert.Null(x);
             Assert.Equal(emp.Count, addingCount);
+        }
+
+        [Fact]
+        public void Count_AddElemetns_CountMustMutchWithLengthOfMockedData()
+        {
+            var emp = AddEmployees();
+            var dict = new Dimp();
+
+            foreach (var item in emp)
+            {
+                dict.Add(item[0].ToString(), item[1]);
+            }
+
+            Assert.Equal(emp.Count, dict.Count);
+        }
+
+
+        [Fact]
+        public void Add_AddMoreElementsThanArraySize_BucketsShouldResizeWhenReachedArrayLimitDesNotThrow()
+        {
+            var emp = AddEmployees();
+            var dict = new Dimp(3);
+
+            foreach (var item in emp)
+            {
+                dict.Add(item[0].ToString(), item[1]);
+            }
+
+            var buckets = typeof(Dimp).GetField("_buckets", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(dict) as LinkedList<DimKvp>[];
+
+            Assert.True(buckets.Length >= emp.Count);
+            Assert.Equal(emp.Count, dict.Count);
         }
 
         public static List<object[]> AddEmployees()
