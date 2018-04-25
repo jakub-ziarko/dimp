@@ -69,18 +69,29 @@ namespace dimp.tests
             Assert.Equal(emp.Count, dict.Count);
         }
 
+        [Fact]
+        public void GetIndexer_AddElementAndGetElementByKey_ShouldReturnValidValue()
+        {
+            var dict = new Dimp();
+            dict.Add("John", 123);
+
+            var result = dict["John"];
+
+            Assert.Equal(123, result);
+        }
+
         public static List<object[]> AddEmployees()
         {
             return new List<object[]>
             {
                 new object[] { "John", 123 },
-                new object[] { "Stacy", 123 },
-                new object[] { "Margaret", 123 },
-                new object[] { "Stefan", 123 },
-                new object[] { "Bozydar", 123 },
-                new object[] { "Mike", 123 },
-                new object[] { "Donald", 123 },
-                new object[] { "Yes", 123 },
+                new object[] { "Stacy", 234 },
+                new object[] { "Margaret", 345 },
+                new object[] { "Stefan", 456 },
+                new object[] { "Bozydar", 567 },
+                new object[] { "Mike", 678 },
+                new object[] { "Donald", 789 },
+                new object[] { "Yes", 890 },
             };
         }
     }

@@ -40,7 +40,7 @@ namespace dimp
                 // Return first element when linked list have only one entry
                 if (_buckets[index].Count == 1)
                 {
-                    return _buckets[index].First.Value;
+                    return _buckets[index].First.Value.Value;
                 }
                 
                 // Worst case when bucket has more then one entry
