@@ -6,19 +6,14 @@ namespace dimp
     public class Dimp
     {
         private LinkedList<DimKvp>[] _buckets;
-        private int _itemsCount;
+        private int _itemsCount;      
 
-        public int Count => _itemsCount;
-
-        public Dimp()
-        {
-            _buckets = new LinkedList<DimKvp>[16];
-        }
-
-        public Dimp(int size)
+        public Dimp(int size = 16)
         {
             _buckets = new LinkedList<DimKvp>[size];
         }
+
+        public int Count => _itemsCount;
 
         public object this[string key]
         {
@@ -67,6 +62,7 @@ namespace dimp
             }
             else
             {
+                // Need to be chcek if the same value already exists
                 _buckets[index].AddLast(new DimKvp { Key = key, Value = value });
             }
 
